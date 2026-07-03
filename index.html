@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026年度 高3 英語重要語句復習アプリ（模擬試験対策・完全対応版）</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Inter"', '"Noto Sans JP"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+        }
+        .card {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            padding: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+        }
+        @media (min-width: 640px) {
+            .card { padding: 32px; }
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn:active { transform: scale(0.98); }
+        .btn-primary { background: #0ea5e9; color: white; }
+        .btn-primary:hover { background: #0284c7; }
+        .btn-secondary { background: white; color: #475569; border: 1px solid #e2e8f0; }
+        .btn-secondary:hover { background: #f8fafc; }
+        .btn-green { background: #10b981; color: white; }
+        .btn-green:hover { background: #059669; }
+        .btn-red { background: #ef4444; color: white; }
+        .btn-red:hover { background: #dc2626; }
+        .btn-orange { background: #f97316; color: white; }
+        .btn-orange:hover { background: #ea580c; }
+        .btn-disabled { background: #cbd5e1; color: #94a3b8; cursor: not-allowed; }
+        
+        .hidden { display: none !important; }
+        
+        .quiz-option {
+            border: 2px solid #f1f5f9;
+            padding: 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+        }
+        .quiz-option:hover { border-color: #0ea5e9; background-color: #f0f9ff; }
+        .quiz-option.correct { border-color: #10b981; background-color: #d1fae5; color: #065f46; }
+        .quiz-option.incorrect { border-color: #ef4444; background-color: #fee2e2; color: #991b1b; }
+        
+        #mic-icon.recording { animation: pulse 1.5s infinite; color: white; }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+
+        .word-checkbox {
+            width: 1.25rem;
+            height: 1.25rem;
+            color: #0ea5e9;
+            border-radius: 0.25rem;
+            border-color: #cbd5e1;
+        }
+        
+        #word-list::-webkit-scrollbar { width: 6px; }
+        #word-list::-webkit-scrollbar-track { background: transparent; }
+        #word-list::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    </style>
+</head>
+<body class="text-slate-800 antialiased">
+
+    <div id="app" class="max-w-4xl mx-auto p-4 sm:p-8">
+        <header class="text-center mb-10">
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                <span class="text-brand-600">2026年度 1年6月進研模試</span><br>
+                英語重要語句復習アプリ（完全対応版）
+            </h1>
+            <p class="text-sm text-slate-500 mt-2">解答解説の重要語句・WORDS & PHRASES 全136語を完璧にマスター</p>
+        </header>
+
+        <!-- Setup Section -->
+        <section id="setup-section" class="card space-y-8">
+            <div>
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
+                    <h2 class="text-xl font-bold text-slate-800 flex items-center">
+                        <span class="flex items-center justify-center w-8 h-8 rounded-full bg-brand-100 text-brand-600 text-sm mr-3 font-bold">1</span>
+                        語句を選択（全136語・登場順）
+                    </h2>
+                    <div class="flex space-x-2 self-end">
+                        <button id="select-all" class="text-xs font-medium text-brand-600 hover:text-brand-700 hover:bg-brand-50 px-3 py-1.5 rounded-lg transition">すべて選択</button>
+                        <button id="deselect-all" class="text-xs font-medium text-slate-500 hover:text-slate-700 hover:bg-slate-100 px-3 py-1.5 rounded-lg transition">すべて解除</button>
+                    </div>
+                </div>
+                
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+                    <div id="word-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 max-h-[50vh] overflow-y-auto pr-2">
+                        <div class="col-span-full text-center text-slate-400 py-8">語彙をロード中...</div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-bold text-slate-800 mb-4 flex items-center">
+                    <span class="flex items-center justify-center w-8 h-8 rounded-full bg-brand-100 text-brand-600 text-sm mr-3 font-bold">2</span>
+                    学習モード
+                </h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <label class="relative flex items-center p-4 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-50 transition-all group bg-white">
+                        <input type="radio" name="mode" value="word" class="peer sr-only" checked>
+                        <div class="w-5 h-5 border-2 border-slate-300 rounded-full mr-3 peer-checked:border-brand-500 peer-checked:bg-brand-500"></div>
+                        <div class="flex flex-col">
+                            <span class="font-bold text-slate-700">単語・フレーズ</span>
+                            <span class="text-xs text-slate-500">模試の重要語句をそのまま学習</span>
+                        </div>
+                    </label>
+                    <label class="relative flex items-center p-4 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-50 transition-all group bg-white">
+                        <input type="radio" name="mode" value="sentence" class="peer sr-only">
+                        <div class="w-5 h-5 border-2 border-slate-300 rounded-full mr-3 peer-checked:border-brand-500 peer-checked:bg-brand-500"></div>
+                        <div class="flex flex-col">
+                            <span class="font-bold text-slate-700">例文で学習</span>
+                            <span class="text-xs text-slate-500">全136語に実戦的なオリジナル例文を追加</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="pt-4 flex flex-col sm:flex-row gap-4 justify-center items-center border-t border-slate-100">
+                <button id="start-learning-btn" class="btn btn-primary w-full sm:w-auto text-lg min-w-[200px]">
+                    <i class="fas fa-play mr-2 text-sm"></i> 学習を開始
+                </button>
+                <button id="quick-test-btn" class="btn btn-orange w-full sm:w-auto text-lg">
+                    <i class="fas fa-random mr-2"></i> ランダムテスト
+                </button>
+                <button id="download-pdf-btn" class="btn btn-green w-full sm:w-auto text-lg">
+                    <i class="fas fa-file-pdf mr-2 text-white"></i> PDF・テスト作成
+                </button>
+            </div>
+        </section>
+
+        <!-- Learning Section -->
+        <section id="learning-section" class="card hidden flex flex-col h-auto min-h-[550px]">
+            <div class="flex justify-between items-center mb-6">
+                 <button id="back-to-setup-btn" class="text-sm text-slate-500 hover:text-slate-800 flex items-center transition">
+                    <i class="fas fa-arrow-left mr-2"></i> 戻る
+                </button>
+                <div class="bg-slate-100 px-4 py-1.5 rounded-full">
+                    <span id="progress-indicator" class="text-sm font-bold text-slate-600 font-mono"></span>
+                </div>
+                <div class="w-16"></div>
+            </div>
+            
+            <div class="flex-grow flex flex-col justify-center mb-8">
+                <div id="flashcard-container" class="relative w-full cursor-pointer group">
+                    <div class="relative w-full min-h-[280px] bg-white rounded-2xl border-2 border-slate-100 shadow-sm hover:border-brand-200 transition-all duration-300 flex flex-col items-center justify-center p-6 text-center">
+                        <div class="w-full flex flex-col items-center">
+                            <div id="illustration-area" class="hidden mb-4 text-brand-500">
+                                <i class="fas fa-graduation-cap text-4xl opacity-80"></i>
+                            </div>
+                            <p id="english-text" class="text-2xl sm:text-3xl font-bold text-slate-800 mb-6 leading-tight select-text"></p>
+                            <div id="japanese-wrapper" class="h-auto min-h-[3rem] transition-all duration-300 opacity-0 transform translate-y-4">
+                                <p id="japanese-text" class="text-xl sm:text-2xl text-brand-600 font-medium"></p>
+                            </div>
+                            <p class="text-xs text-slate-400 mt-8 uppercase tracking-widest">カードをクリックして和訳を表示</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="pronunciation-feedback-container" class="mt-6 min-h-[60px]"></div>
+            </div>
+
+            <div class="mt-auto">
+                <div class="flex justify-center items-center space-x-6 mb-8">
+                    <button id="speak-btn" class="btn btn-secondary rounded-full w-14 h-14 p-0 flex items-center justify-center shadow-sm" title="お手本の音声を聞く">
+                        <i class="fas fa-volume-up text-xl"></i>
+                    </button>
+                    <button id="record-btn" class="btn btn-red rounded-full w-16 h-16 p-0 flex items-center justify-center shadow-lg" title="発音して録音する">
+                        <i id="mic-icon" class="fas fa-microphone text-2xl"></i>
+                    </button>
+                    <button id="play-recording-btn" class="btn btn-green btn-disabled rounded-full w-14 h-14 p-0 flex items-center justify-center shadow-sm" disabled title="自分の声を聞く">
+                        <i class="fas fa-play text-xl"></i>
+                    </button>
+                </div>
+                <audio id="recording-player" class="hidden"></audio>
+
+                <div class="flex justify-between items-center gap-2">
+                    <button id="prev-btn" class="btn btn-secondary px-4 sm:px-6"><i class="fas fa-chevron-left mr-2"></i> 前へ</button>
+                    <button id="start-test-btn" class="btn btn-primary flex-grow sm:flex-grow-0 px-8 shadow-md">テストへ</button>
+                    <button id="next-btn" class="btn btn-secondary px-4 sm:px-6">次へ <i class="fas fa-chevron-right ml-2"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Test Options Section -->
+        <section id="test-options-section" class="card hidden text-center py-12">
+            <h2 class="text-3xl font-bold text-slate-800 mb-8 font-extrabold">テスト問題数設定</h2>
+            <div id="test-choices" class="flex flex-wrap justify-center gap-4 mb-12"></div>
+            <button id="back-to-learning-btn" class="text-slate-500 hover:text-slate-800 font-medium">戻る</button>
+        </section>
+
+        <!-- Quiz Section -->
+        <section id="quiz-section" class="card hidden">
+            <div class="flex justify-between items-center mb-6 pb-4 border-b">
+                 <h2 class="text-xl font-bold">模擬テスト <span id="quiz-progress" class="text-sm bg-brand-100 text-brand-700 px-2 py-1 rounded"></span></h2>
+                 <button id="abort-test-btn" class="text-sm text-red-500 hover:text-red-700">テスト中断</button>
+            </div>
+            <div class="mb-8 text-center">
+                <p id="quiz-question" class="text-2xl sm:text-3xl font-bold text-slate-800 mb-8"></p>
+                <div id="quiz-options" class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left"></div>
+            </div>
+            <div id="feedback" class="text-center font-bold my-4 min-h-[40px] text-lg"></div>
+            <div class="text-center h-14">
+                 <button id="next-question-btn" class="hidden btn btn-primary px-8">次の問題へ</button>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results-section" class="card hidden text-center py-12">
+            <div class="mb-6"><span class="text-5xl font-bold text-brand-600" id="score-percentage"></span></div>
+            <p id="score-text" class="text-xl text-slate-600 mb-8"></p>
+            <div id="incorrect-answers-container" class="text-left bg-red-50 border border-red-100 rounded-xl p-6 mb-8 hidden">
+                <h3 class="text-lg font-bold text-red-800 mb-4">要復習リスト</h3>
+                <ul id="incorrect-answers-list" class="space-y-2"></ul>
+            </div>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button id="restart-btn" class="btn btn-primary">最初から解き直す</button>
+                <button id="back-to-home-btn" class="btn btn-secondary">ホームに戻る</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- PDF Modal -->
+    <div id="pdf-modal" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl">
+            <div class="bg-slate-50 px-6 py-4 border-b flex justify-between items-center">
+                <h3 class="text-lg font-bold text-slate-800">プリント・テスト作成メニュー</h3>
+                <button id="close-modal-icon" class="text-slate-400 hover:text-slate-600"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="p-6 grid grid-cols-1 gap-3">
+                <button id="download-list-btn" class="p-3 border rounded-lg hover:bg-brand-50 text-left font-bold text-slate-700 hover:border-brand-500 transition-colors">1. 重要語句・意味リスト (語彙一覧プリント)</button>
+                <button id="download-en-quiz-btn" class="p-3 border rounded-lg hover:bg-brand-50 text-left font-bold text-slate-700 hover:border-brand-500 transition-colors">2. 英単語テスト (日本語から英語への記述)</button>
+                <button id="download-ja-quiz-btn" class="p-3 border rounded-lg hover:bg-brand-50 text-left font-bold text-slate-700 hover:border-brand-500 transition-colors">3. 和訳テスト (英語から日本語への記述)</button>
+                <button id="download-mixed-quiz-btn" class="p-3 border rounded-lg hover:bg-brand-50 text-left font-bold text-slate-700 hover:border-brand-500 transition-colors">4. 混合実戦テスト (英訳・和訳シャッフル)</button>
+                <button id="download-sentence-quiz-btn" class="p-3 border rounded-lg hover:bg-brand-50 text-left font-bold text-slate-700 hover:border-brand-500 transition-colors">5. 例文穴埋めテスト (実戦形式・記述)</button>
+                <button id="download-sentence-mixed-quiz-btn" class="p-3 border rounded-lg hover:bg-brand-50 text-left font-bold text-slate-700 hover:border-brand-500 transition-colors">6. 例文和訳・空所補充記述テスト</button>
+            </div>
+            <div class="bg-slate-50 px-6 py-3 border-t text-right">
+                <button id="close-modal-btn" class="text-sm font-medium text-slate-500 hover:text-slate-800">閉じる</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 常数設定
+        const APP_TITLE = "2026年度 1年6月進研模試 英語重要語句復習アプリ（完全対応版）";
+
+        // --- COMPLETE VOCABULARY DATA (136 Words in order of PDF pages) ---
+        const vocabularyData = [
+            {"english": "be supposed to do", "japanese": "〜することになっている、〜するはずである", "sentence": "The weather [is supposed to] be good on Sunday.", "sentence_ja": "日曜日は良い天気になるはずです。"},
+            {"english": "How about -ing?", "japanese": "〜してはどうですか?", "sentence": "[How about riding] our bikes to the zoo?", "sentence_ja": "動物園に自転車で行くのはどうですか？"},
+            {"english": "look + adjective", "japanese": "〜に見える", "sentence": "Those pizzas [look good] too.", "sentence_ja": "それらのピザも美味しそうに見えます。"},
+            {"english": "Why don't we~?", "japanese": "〜しませんか?", "sentence": "[Why don't we] order a few dishes to share?", "sentence_ja": "いくつかの料理を注文して分け合いませんか？"},
+            {"english": "farm", "japanese": "農場", "sentence": "He spent his summer working on a [farm].", "sentence_ja": "彼は夏を農場で働いて過ごしました。"},
+            {"english": "Can you ~?", "japanese": "〜してくれませんか?", "sentence": "[Can you help] me find my keys?", "sentence_ja": "鍵を探すのを手伝ってくれませんか？"},
+            {"english": "How about + noun?", "japanese": "〜はどうですか?", "sentence": "[How about] this bag for your mother?", "sentence_ja": "お母さんへのプレゼントにこのバッグはどうですか？"},
+            {"english": "What's up?", "japanese": "どうしたんですか?", "sentence": "[What's up]? You look worried.", "sentence_ja": "どうしたんですか？心配そうな顔をして。"},
+            {"english": "shelf", "japanese": "棚", "sentence": "Please put the books on the middle [shelf].", "sentence_ja": "本を真ん中の棚に置いてください。"},
+            {"english": "the other way around", "japanese": "逆に", "sentence": "I thought you liked her, but it was [the other way around].", "sentence_ja": "あなたが彼女を好きなのだと思っていましたが、実際は逆でした。"},
+            {"english": "in the middle of", "japanese": "〜の真ん中に", "sentence": "The trophy should go [in the middle of] the top shelf.", "sentence_ja": "トロフィーは一番上の棚の真ん中に置くべきです。"},
+            {"english": "That's sweet of you.", "japanese": "あなたは優しいですね。", "sentence": "Thank you for the gift; [that's sweet of you].", "sentence_ja": "プレゼントをありがとう。あなたは優しいですね。"},
+            {"english": "wrap", "japanese": "〜を包む", "sentence": "I cannot show it to you because it is already [wrapped].", "sentence_ja": "もう包装してしまったので、それをお見せすることはできません。"},
+            {"english": "extra", "japanese": "余分の", "sentence": "Do you need an [extra] blanket?", "sentence_ja": "余分な毛布は必要ですか？"},
+            {"english": "part-time job", "japanese": "アルバイト", "sentence": "I am thinking of getting a [part-time job].", "sentence_ja": "アルバイトをしようかと考えています。"},
+            {"english": "recommend -ing", "japanese": "〜することを勧める", "sentence": "I [recommend working] at the local bookstore.", "sentence_ja": "地元の書店で働くことをお勧めします。"},
+            {"english": "be interested in", "japanese": "〜に興味がある", "sentence": "I [am interested in] volunteering at the hospital.", "sentence_ja": "私は病院でのボランティア活動に興味があります。"},
+            {"english": "housework", "japanese": "家事", "sentence": "He helps his parents with the [housework] every weekend.", "sentence_ja": "彼は毎週末、両親の家事を手伝います。"},
+            {"english": "elderly people", "japanese": "お年寄り", "sentence": "I wanted to find a job helping [elderly people].", "sentence_ja": "お年寄りを手助けする仕事を見つけたかったのです。"},
+            {"english": "instead", "japanese": "代わりに", "sentence": "We could not find a table, so we ordered takeout [instead].", "sentence_ja": "席が見つからなかったので、代わりにテイクアウトを注文しました。"},
+            {"english": "pick up", "japanese": "〜を迎えに行く", "sentence": "They should [pick up] the students at school.", "sentence_ja": "彼らは学校へ生徒を迎えに行くべきです。"},
+            {"english": "pity", "japanese": "残念なこと", "sentence": "It is a [pity] that you cannot join us tonight.", "sentence_ja": "今夜あなたが参加できないのは残念なことです。"},
+            {"english": "go out for dinner", "japanese": "夕食に出かける", "sentence": "Do you want to [go out for dinner] tonight?", "sentence_ja": "今夜、夕食に出かけたいですか？"},
+            {"english": "work late", "japanese": "遅くまで働く", "sentence": "She has to [work late] to finish the project.", "sentence_ja": "彼女はプロジェクトを終わらせるために遅くまで働かなければなりません。"},
+            {"english": "some other time", "japanese": "いつか別の機会に", "sentence": "Let's go out for coffee [some other time].", "sentence_ja": "いつか別の機会にコーヒーを飲みに行きましょう。"},
+            {"english": "impression", "japanese": "印象", "sentence": "Did you get a different [impression] of the city each time?", "sentence_ja": "訪れるたびにその都市の異なる印象を受けましたか？"},
+            {"english": "appreciate", "japanese": "〜の価値〔よさ] を認める", "sentence": "I now [appreciate] the beauty of traditional tea ceremonies.", "sentence_ja": "私は今や、伝統的な茶道の素晴らしさがわかります。"},
+            {"english": "knock off...", "japanese": "〜を･･･から落とす", "sentence": "The cat [knocked] the cup [off] the desk.", "sentence_ja": "猫が机からカップを落としました。"},
+            {"english": "not any more", "japanese": "もう(これ以上)〜ない", "sentence": "We do [not] need to worry about that [anymore].", "sentence_ja": "私たちはそれについてもうこれ以上心配する必要はありません。"},
+            {"english": "happen to ~", "japanese": "〜に(よくないことが) ふりかかる", "sentence": "Do you know what [happened to] her beautiful cup?", "sentence_ja": "彼女の美しいカップに何が起こったか（ふりかかったか）知っていますか？"},
+            {"english": "throw away", "japanese": "(不要な物)を捨て(去)る", "sentence": "It was broken, so I had to [throw] it [away].", "sentence_ja": "壊れていたので、それを捨てなければませんでした。"},
+            {"english": "Not again!", "japanese": "またか!", "sentence": "[Not again]! He broke another glass.", "sentence_ja": "またか！彼がまたコップを割りました。"},
+            {"english": "taste", "japanese": "〜を味わう、食べる", "sentence": "I have never [tasted] anything like this before.", "sentence_ja": "このようなものをこれまでに味わったことがありません。"},
+            {"english": "favorite", "japanese": "お気に入りのもの", "sentence": "This sushi restaurant is my [favorite].", "sentence_ja": "この寿司屋は私のお気に入りです。"},
+            {"english": "wrong", "japanese": "間違った", "sentence": "I am afraid you are going in the [wrong] direction.", "sentence_ja": "残念ながらあなたは間違った方向に進んでいると思います。"},
+            {"english": "Here you are.", "japanese": "どうぞ。", "sentence": "Can I see your map? - [Here you are].", "sentence_ja": "地図を見せてもらえますか？ - どうぞ。"},
+            {"english": "What's wrong?", "japanese": "どうしたんですか?", "sentence": "[What's wrong] with the printer?", "sentence_ja": "プリンターはどうしたんですか（何が問題ですか）？"},
+            {"english": "No problem.", "japanese": "どういたしまして。", "sentence": "Thank you for your help. - [No problem].", "sentence_ja": "手伝ってくれてありがとう。 - どういたしまして。"},
+            {"english": "ceremony", "japanese": "式,式典", "sentence": "The graduation [ceremony] took place on June 15th.", "sentence_ja": "卒業式は6月15日に行われました。"},
+            {"english": "on time", "japanese": "時間 [定刻] 通りに", "sentence": "You must leave now, or you won't arrive [on time].", "sentence_ja": "今すぐ出発しなければ、時間通りに到着しないでしょう。"},
+            {"english": "recommend", "japanese": "〜を薦める", "sentence": "Have you finished reading the book I [recommended]?", "sentence_ja": "私が薦めた本を読み終えましたか？"},
+            {"english": "publish", "japanese": "〜を掲載する、出版する", "sentence": "The newspaper [published] an article about a new park.", "sentence_ja": "新聞は新しい公園に関する記事を掲載しました。"},
+            {"english": "article", "japanese": "記事", "sentence": "I read an interesting [article] about ocean life.", "sentence_ja": "私は海洋生物に関する興味深い記事を読みました。"},
+            {"english": "mysterious", "japanese": "不思議な", "sentence": "A [mysterious] creature was seen in the city park.", "sentence_ja": "不思議な生き物が市の公園で目撃されました。"},
+            {"english": "creature", "japanese": "生き物", "sentence": "The deep ocean is full of strange [creatures].", "sentence_ja": "深海は奇妙な生き物でいっぱいです。"},
+            {"english": "still", "japanese": "今もなお、まだ", "sentence": "Even after three years, I [still] think of my pet daily.", "sentence_ja": "3年経った今でも、私は毎日ペットのことを考えています。"},
+            {"english": "Here is [are]~.", "japanese": "ここに〜があります。", "sentence": "[Here are] some cakes my father made.", "sentence_ja": "ここに父が作ったケーキがいくつかあります。"},
+            {"english": "wallet", "japanese": "財布", "sentence": "I lost the [wallet] my aunt gave me.", "sentence_ja": "おばがくれた財布を失くしてしまいました。"},
+            {"english": "there is something wrong with A", "japanese": "Aに何か問題〔異常〕がある", "sentence": "I wonder if [there is something wrong with] my phone.", "sentence_ja": "携帯電話に何か不具合があるのだろうかと思います。"},
+            {"english": "hallway", "japanese": "廊下", "sentence": "She watched her brother play from the [hallway].", "sentence_ja": "彼女は廊下から弟が遊んでいるのを見ていました。"},
+            {"english": "forehead", "japanese": "額", "sentence": "Amy pressed her [forehead] against the cold window.", "sentence_ja": "エイミーは冷たい窓に額を押し当てました。"},
+            {"english": "childish", "japanese": "子どもっぽい、子どもじみた", "sentence": "She muttered that her brother's games were [childish].", "sentence_ja": "彼女は弟のゲームが子どもっぽいとつぶやきました。"},
+            {"english": "familiar", "japanese": "なじみ深い", "sentence": "She looked down at the [familiar] sights of Los Angeles.", "sentence_ja": "彼女はロサンゼルスのなじみ深い景色を見下ろしました。"},
+            {"english": "mutter", "japanese": "つぶやく", "sentence": "\"It's not fair,\" she [muttered] quietly.", "sentence_ja": "「不公平だ」と彼女は静かにつぶやきました。"},
+            {"english": "lift", "japanese": "(気持ちなど)を高揚させる", "sentence": "Even the warm weather couldn't [lift] her heavy heart.", "sentence_ja": "暖かい天気でさえ、彼女の重苦しい気持ちを高揚させることはできませんでした。"},
+            {"english": "chest", "japanese": "胸", "sentence": "A heavy feeling filled her [chest] during the flight.", "sentence_ja": "飛行中、彼女の胸は重苦しい気持ちでいっぱいでした。"},
+            {"english": "immediately", "japanese": "ただちに、すぐさま", "sentence": "He [immediately] burst into tears when he heard the news.", "sentence_ja": "彼はそのニュースを聞くと、ただちに涙を流しました。"},
+            {"english": "annoyance", "japanese": "いらだち", "sentence": "She spoke with a hint of [annoyance] in her voice.", "sentence_ja": "彼女はいらだちを少し交えた声で話しました。"},
+            {"english": "miserable", "japanese": "みじめな、悲惨な", "sentence": "By winter, Amy felt truly [miserable] at her new school.", "sentence_ja": "冬になるまでに、エイミーは新しい学校で本当にみじめに感じていました。"},
+            {"english": "argue", "japanese": "反対する、異議を唱える", "sentence": "When they suggested moving back, she didn't [argue].", "sentence_ja": "戻ることを提案されたとき、彼女は反対しませんでした。"},
+            {"english": "burst into ~", "japanese": "突然〜し始める", "sentence": "Jack [burst into] crying when he heard about the move.", "sentence_ja": "引っ越しのことを聞いて、ジャックは突然泣き始めました。"},
+            {"english": "reality", "japanese": "現実", "sentence": "The [reality] of the language barrier hit her on the first day.", "sentence_ja": "初日、言葉の壁の現実が彼女を襲いました。"},
+            {"english": "disappointment", "japanese": "失望,落胆", "sentence": "Despite her [disappointment], she decided to keep trying.", "sentence_ja": "失望したにもかかわらず、彼女は挑戦し続けることを決意しました。"},
+            {"english": "sweetheart", "japanese": "あなた (呼びかけに用いる)", "sentence": "\"Don't worry, [sweetheart], everything will be fine,\" said Grandma.", "sentence_ja": "「心配しないで。すべてうまくいくわ」とおばあちゃんは言いました。"},
+            {"english": "complicated", "japanese": "複雑な", "sentence": "The blackboard was covered with [complicated] kanji.", "sentence_ja": "黒板は複雑な漢字で覆われていました。"},
+            {"english": "silly", "japanese": "ばかな、愚かな", "sentence": "I felt [silly] because I couldn't understand the joke.", "sentence_ja": "ジョークを理解できなかったので、自分が愚かに思えました。"},
+            {"english": "flood", "japanese": "洪水", "sentence": "The teacher's words washed over her like a [flood].", "sentence_ja": "先生の言葉が洪水のように彼女に押し寄せました。"},
+            {"english": "politely", "japanese": "礼儀正しく、丁寧に", "sentence": "Her classmates smiled [politely] and tried to welcome her.", "sentence_ja": "クラスメイトたちは礼儀正しく微笑み、彼女を歓迎しようとしました。"},
+            {"english": "comfort", "japanese": "慰め、快適さ", "sentence": "The quiet library offered little [comfort] to her.", "sentence_ja": "静かな図書館も、彼女にほとんど安らぎ（慰め）を与えませんでした。"},
+            {"english": "on the other hand", "japanese": "一方で", "sentence": "Jack, [on the other hand], made friends very quickly.", "sentence_ja": "一方でジャックは、とても早く友達を作りました。"},
+            {"english": "light up", "japanese": "明るくなる、点灯する", "sentence": "A quiet determination [lit up] inside of Amy.", "sentence_ja": "静かな決意のようなものがエイミーの中で灯りました。"},
+            {"english": "at ease", "japanese": "くつろいで、気楽に", "sentence": "Jack immediately felt [at ease] in his new environment.", "sentence_ja": "ジャックは新しい環境ですぐに気楽に（くつろいで）感じました。"},
+            {"english": "determination", "japanese": "決心,決意", "sentence": "Her eyes were full of [determination] to master Japanese.", "sentence_ja": "彼女の目は日本語をマスターするという決意に満ちていました。"},
+            {"english": "to one's surprise", "japanese": "(人が) 驚いたことに", "sentence": "[To her surprise], Jack brought home ten classmates.", "sentence_ja": "彼女が驚いたことに、ジャックはクラスメイトを10人も家に連れてきました。"},
+            {"english": "head toward ~", "japanese": "〜に向かう", "sentence": "The plane was [heading toward] Tokyo once again.", "sentence_ja": "飛行機は再び東京に向かっていました。"},
+            {"english": "absolutely", "japanese": "完全に", "sentence": "She was [absolutely] ready for her study abroad program.", "sentence_ja": "彼女は留学プログラムの準備が完全に整っていました。"},
+            {"english": "purpose", "japanese": "目的,目標", "sentence": "This time, Amy traveled with a clear [purpose].", "sentence_ja": "今回、エイミーは明確な目的を持って旅をしました。"},
+            {"english": "imaginary", "japanese": "想像上の", "sentence": "As a child, she had many [imaginary] friends.", "sentence_ja": "子供の頃、彼女にはたくさんの想像上の友達がいました。"},
+            {"english": "set out", "japanese": "出発する", "sentence": "She was ready to [set out] on a new adventure.", "sentence_ja": "彼女は新しい冒険に出発する準備ができていました。"},
+            {"english": "confidence", "japanese": "自信、信頼", "sentence": "She arrived in Japan with much more [confidence].", "sentence_ja": "彼女はもっと大きな自信を持って日本に到着しました。"},
+            {"english": "midday", "japanese": "真昼,正午", "sentence": "The city streets are extremely busy at [midday].", "sentence_ja": "真昼には都市の通りは極めて混雑します。"},
+            {"english": "go by", "japanese": "通り過ぎる", "sentence": "She stood on the street, watching cars [go by].", "sentence_ja": "彼女は通りに立ち、車が通り過ぎるのを見ていました。"},
+            {"english": "reduce", "japanese": "〜を減らす", "sentence": "The city wants to [reduce] the use of private cars.", "sentence_ja": "市は自家用車の使用を減らしたいと考えています。"},
+            {"english": "seem + to-infinitive", "japanese": "〜する 〔である] と思われる", "sentence": "These measures [seem to] improve the quality of life.", "sentence_ja": "これらの対策は生活の質を向上させるように思われます。"},
+            {"english": "city planner", "japanese": "都市計画家", "sentence": "[City planners] are trying to make cities more livable.", "sentence_ja": "都市計画家たちは都市をもっと住みやすくしようとしています。"},
+            {"english": "as well", "japanese": "〜もまた、同様に", "sentence": "We need to focus on pedestrian safety [as well].", "sentence_ja": "私たちは歩行者の安全にも同様に焦点を当てる必要があります。"},
+            {"english": "environment", "japanese": "環境", "sentence": "Children should grow up in a safe [environment].", "sentence_ja": "子供たちは安全な環境で育つべきです。"},
+            {"english": "attractive", "japanese": "魅力的な", "sentence": "The park is one of the most [attractive] areas in the city.", "sentence_ja": "その公園は市内で最も魅力的な地域の一つです。"},
+            {"english": "surrounding", "japanese": "周辺地域,環境", "sentence": "The quiet [surrounding] neighborhood is perfect for families.", "sentence_ja": "静かな周辺の地域は家族連れに最適です。"},
+            {"english": "livable", "japanese": "住みやすい", "sentence": "Trees and bike lanes make a city more [livable].", "sentence_ja": "木々や自転車専用道路は都市をより住みやすくします。"},
+            {"english": "comfortable", "japanese": "快適な", "sentence": "Public transit should be clean and [comfortable].", "sentence_ja": "公共交通機関は清潔で快適であるべきです。"},
+            {"english": "neighborhood", "japanese": "(特定の特色を有する) 地域、地区", "sentence": "They are building a new type of [neighborhood].", "sentence_ja": "彼らは新しいタイプの地域を建設しています。"},
+            {"english": "restrict", "japanese": "〜を制限する", "sentence": "Many cities [restrict] car access to the center.", "sentence_ja": "多くの都市が中心部への車のアクセスを制限しています。"},
+            {"english": "mixed-use", "japanese": "複合用途", "sentence": "They designed a [mixed-use] district for living and shopping.", "sentence_ja": "彼らは居住と買い物のための複合用途地区を設計しました。"},
+            {"english": "breathe", "japanese": "〜を吸う", "sentence": "We want to [breathe] clean air in our cities.", "sentence_ja": "私たちは自分たちの都市できれいな空気を吸いたいのです。"},
+            {"english": "entertainment", "japanese": "娯楽", "sentence": "The district offers plenty of shopping and [entertainment].", "sentence_ja": "その地区はたくさんの買い物や娯楽を提供しています。"},
+            {"english": "healthy", "japanese": "健康的な", "sentence": "Walking is a great way to stay [healthy].", "sentence_ja": "歩くことは健康を維持するための素晴らしい方法です。"},
+            {"english": "connect A to B", "japanese": "AをBにつなぐ、接続する", "sentence": "A special bus [connects] the station [to] the shopping mall.", "sentence_ja": "特別なバスが駅とショッピングモールをつないでいます。"},
+            {"english": "include", "japanese": "〜を含む", "sentence": "The list of bike-friendly cities [includes] Paris.", "sentence_ja": "自転車に優しい都市のリストにはパリが含まれています。"},
+            {"english": "preserve", "japanese": "〜を保存する", "sentence": "The planners wanted to [preserve] ancient historical sites.", "sentence_ja": "計画家たちは古代の遺跡を保存したいと考えました。"},
+            {"english": "charge", "japanese": "〜を請求する、(税金など)を課す", "sentence": "Some cities [charge] a fee to drive in the center.", "sentence_ja": "一部の都市は、中心部での運転に対して料金を課しています。"},
+            {"english": "ancient", "japanese": "古代の", "sentence": "Beirut is famous for its [ancient] ruins.", "sentence_ja": "ベイルートは古代の遺跡で有名です。"},
+            {"english": "congestion", "japanese": "(道路などの) 混雑、渋滞", "sentence": "Traffic [congestion] is a major issue in London.", "sentence_ja": "交通渋滞はロンドンでの主要な問題です。"},
+            {"english": "historical site", "japanese": "史跡、遺跡", "sentence": "They walked through the ancient [historical site].", "sentence_ja": "彼らは古代の史跡を歩いて通り抜けました。"},
+            {"english": "fee", "japanese": "料金", "sentence": "Drivers must pay a [fee] to enter the congestion zone.", "sentence_ja": "運転手は混雑ゾーンに入るために料金を支払わなければなりません。"},
+            {"english": "fill A with B", "japanese": "AをBで満たす、いっぱいにする", "sentence": "In the evening, the square [is filled with] families.", "sentence_ja": "夕方になると、広場は家族連れでいっぱいになります。"},
+            {"english": "as a result", "japanese": "結果的に、結果として", "sentence": "[As a result], more people are using public transit.", "sentence_ja": "結果として、より多くの人々が公共交通機関を利用しています。"},
+            {"english": "public transportation", "japanese": "公共交通機関", "sentence": "Using [public transportation] reduces air pollution.", "sentence_ja": "公共交通機関を利用することは大気汚染を減らします。"},
+            {"english": "diner", "japanese": "(飲食店で) 食事をする人", "sentence": "The outdoor cafes are filled with happy [diners].", "sentence_ja": "屋外カフェは楽しそうに食事をする人々でいっぱいです。"},
+            {"english": "traffic jam", "japanese": "交通渋滞", "sentence": "I was stuck in a [traffic jam] for an hour.", "sentence_ja": "私は1時間、交通渋滞に巻き込まれました。"},
+            {"english": "economic", "japanese": "経済的な", "sentence": "Cities provide many [economic] opportunities.", "sentence_ja": "都市は多くの経済的な機会を提供します。"},
+            {"english": "introduce", "japanese": "〜を導入する", "sentence": "The mayor decided to [introduce] a new transit fee.", "sentence_ja": "市長は新しい交通料金を導入することを決定しました。"},
+            {"english": "opportunity", "japanese": "機会", "sentence": "Studying abroad is a great [opportunity] to learn a language.", "sentence_ja": "留学は言語を学ぶ素晴らしい機会です。"},
+            {"english": "provide", "japanese": "〜を供給する、提供する", "sentence": "We must [provide] clean water for everyone.", "sentence_ja": "私たちはすべての人にきれいな水を提供しなければなりません。"},
+            {"english": "improve", "japanese": "〜を改善する、向上させる", "sentence": "He wants to [improve] his speaking skills.", "sentence_ja": "彼はスピーキングスキルを向上させたいと考えています。"},
+            {"english": "generally", "japanese": "一般に、全体的に", "sentence": "Cities with bike lanes are [generally] safer.", "sentence_ja": "自転車用道路のある都市は一般的に安全です。"},
+            {"english": "current", "japanese": "現在の", "sentence": "What is the [current] trend in city design?", "sentence_ja": "都市デザインの現在の傾向は何ですか？"},
+            {"english": "trend", "japanese": "傾向,流行", "sentence": "The [trend] is moving toward walkable spaces.", "sentence_ja": "傾向は歩行者に優しい空間へと移っています。"},
+            {"english": "approach", "japanese": "(問題などへの) 取り組み方", "sentence": "We need a new [approach] to solve traffic issues.", "sentence_ja": "交通問題を解決するために新しい取り組み方が必要です。"},
+            {"english": "keep -ing", "japanese": "〜し続ける", "sentence": "Some people [kept chatting] even after finishing coffee.", "sentence_ja": "コーヒーを飲み終えた後でも、おしゃべりをし続ける人がいました。"},
+            {"english": "continue -ing [to-infinitive]", "japanese": "〜し続ける", "sentence": "The baby [continued to sleep] despite the noise.", "sentence_ja": "騒音にもかかわらず、赤ちゃんは眠り続けました。"},
+            {"english": "chat", "japanese": "おしゃべりをする", "sentence": "They sat in the cafe and [chatted] for hours.", "sentence_ja": "彼らはカフェに座って何時間もおしゃべりしました。"},
+            {"english": "stop -ing", "japanese": "〜するのを止める", "sentence": "Please [stop talking] while the teacher is speaking.", "sentence_ja": "先生が話している間は話すのを止めてください。"},
+            {"english": "quite a", "japanese": "かなりの〜", "sentence": "It took [quite a] long time to find a seat.", "sentence_ja": "席を見つけるのにかなりの時間がかかりました。"},
+            {"english": "while", "japanese": "(ある長さの)時間", "sentence": "We had to wait for a [while] before sitting down.", "sentence_ja": "私たちは座る前にしばらく（時間）待たなければなりませんでした。"},
+            {"english": "had to + verb", "japanese": "〜しなければならなかった", "sentence": "We [had to] wait outside because of the crowd.", "sentence_ja": "混雑のため、私たちは外で待たなければなりませんでした。"},
+            {"english": "for a long time", "japanese": "長い時間", "sentence": "They have been living in Tokyo [for a long time].", "sentence_ja": "彼らは長い間東京に住んでいます。"},
+            {"english": "unclear", "japanese": "不明な", "sentence": "It is [unclear] when the train will restart.", "sentence_ja": "電車がいつ運転を再開するかは不明です。"},
+            {"english": "start -ing", "japanese": "〜し始める", "sentence": "It [started raining] just as we stepped outside.", "sentence_ja": "外に出た途端に雨が降り始めました。"},
+            {"english": "run", "japanese": "(電車などが)運行する", "sentence": "The trains do not [run] late at night.", "sentence_ja": "電車は夜遅くには運行していません。"},
+            {"english": "transportation", "japanese": "交通機関", "sentence": "Buses are a common form of [transportation].", "sentence_ja": "バスは一般的な交通機関です。"},
+            {"english": "option", "japanese": "選択肢", "sentence": "We have several [options] to reach the airport.", "sentence_ja": "空港に到着するためのいくつかの選択肢があります。"},
+            {"english": "service", "japanese": "(電車の)便", "sentence": "Train [service] is suspended due to heavy snow.", "sentence_ja": "大雪のため、電車の運行（便）が見合わされています。"},
+            {"english": "restart", "japanese": "再開する", "sentence": "They hope to [restart] the service by tomorrow morning.", "sentence_ja": "彼らは明日の朝までに運行を再開したいと考えています。"},
+            {"english": "it's better + to-infinitive", "japanese": "〜するの方がよりよい", "sentence": "[It is better to] use a taxi in this situation.", "sentence_ja": "この状況ではタクシーを利用する方がより良いです。"},
+            {"english": "had better + verb", "japanese": "〜した方がよい", "sentence": "You [had better] check the schedule before leaving.", "sentence_ja": "出発する前にスケジュールを確認した方がよいです。"}
+        ];
+
+        // --- APP STATE ---
+        let selectedWords = [];
+        let currentWordIndex = 0;
+        let learningMode = 'word';
+        let quizQuestions = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let incorrectAnswers = [];
+        let voices = [];
+        let recognition;
+        let mediaRecorder;
+        let audioChunks = [];
+        let recordedAudioURL = null;
+
+        const els = {
+            setupSection: document.getElementById('setup-section'),
+            learningSection: document.getElementById('learning-section'),
+            testOptionsSection: document.getElementById('test-options-section'),
+            quizSection: document.getElementById('quiz-section'),
+            resultsSection: document.getElementById('results-section'),
+            wordList: document.getElementById('word-list'),
+            flashcardContainer: document.getElementById('flashcard-container'),
+            englishText: document.getElementById('english-text'),
+            japaneseWrapper: document.getElementById('japanese-wrapper'),
+            japaneseText: document.getElementById('japanese-text'),
+            progressIndicator: document.getElementById('progress-indicator'),
+            illustrationArea: document.getElementById('illustration-area'),
+            pronunciationFeedback: document.getElementById('pronunciation-feedback-container'),
+            micIcon: document.getElementById('mic-icon'),
+            recordingPlayer: document.getElementById('recording-player')
+        };
+
+        // --- INIT ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderWordList();
+            initSpeech();
+            attachListeners();
+            switchSection('setup');
+        });
+
+        // HTMLエスケープ処理
+        function escapeHtml(str) {
+            return str
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        function renderWordList() {
+            els.wordList.innerHTML = '';
+            vocabularyData.forEach((word, index) => {
+                const div = document.createElement('div');
+                div.className = 'relative flex items-start p-3 bg-white border border-slate-200 rounded-lg hover:border-brand-300 transition-colors cursor-pointer group';
+                div.innerHTML = `
+                    <div class="flex items-center h-5">
+                        <input type="checkbox" class="word-checkbox" data-index="${index}" id="w-chk-${index}">
+                    </div>
+                    <div class="ml-3 text-sm flex-grow">
+                        <label for="w-chk-${index}" class="font-bold text-slate-800 block cursor-pointer group-hover:text-brand-600">${escapeHtml(word.english)}</label>
+                        <p class="text-slate-500 text-xs mt-1 cursor-pointer">${escapeHtml(word.japanese)}</p>
+                    </div>
+                `;
+                div.onclick = (e) => {
+                    if (e.target.type !== 'checkbox' && e.target.tagName !== 'LABEL') {
+                        const cb = div.querySelector('input');
+                        cb.checked = !cb.checked;
+                    }
+                };
+                els.wordList.appendChild(div);
+            });
+        }
+
+        function switchSection(name) {
+            ['setupSection', 'learningSection', 'testOptionsSection', 'quizSection', 'resultsSection'].forEach(k => {
+                if(els[k]) {
+                    els[k].classList.add('hidden');
+                    els[k].classList.remove('animate-fade-in');
+                }
+            });
+            const target = els[name + 'Section'];
+            if(target) {
+                target.classList.remove('hidden');
+                requestAnimationFrame(() => target.classList.add('animate-fade-in'));
+            }
+        }
+
+        function updateCard() {
+            const word = selectedWords[currentWordIndex];
+            const mode = document.querySelector('input[name="mode"]:checked').value;
+            
+            els.japaneseWrapper.classList.remove('opacity-100', 'translate-y-0');
+            els.japaneseWrapper.classList.add('opacity-0', 'translate-y-4');
+            els.pronunciationFeedback.innerHTML = '';
+
+            // 録音再生をリセット
+            document.getElementById('play-recording-btn').disabled = true;
+            document.getElementById('play-recording-btn').classList.add('btn-disabled');
+            recordedAudioURL = null;
+
+            if (mode === 'sentence' && word.sentence) {
+                els.illustrationArea.classList.remove('hidden');
+                // [...] 形式の記号を置換
+                const formattedSentence = word.sentence.replace(/\[(.*?)\]/g, '<span class="text-brand-600 border-b-2 border-brand-200 font-extrabold">$1</span>');
+                els.englishText.innerHTML = formattedSentence;
+                els.japaneseText.innerHTML = word.sentence_ja || word.japanese;
+                els.englishText.className = "text-xl sm:text-2xl font-bold text-slate-800 mb-6 leading-relaxed select-text";
+            } else {
+                els.illustrationArea.classList.add('hidden');
+                els.englishText.textContent = word.english;
+                els.japaneseText.textContent = word.japanese;
+                els.englishText.className = "text-2xl sm:text-3xl font-bold text-slate-800 mb-6 leading-tight select-text";
+            }
+
+            els.progressIndicator.textContent = `${currentWordIndex + 1} / ${selectedWords.length}`;
+            
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            prevBtn.disabled = currentWordIndex === 0;
+            nextBtn.disabled = currentWordIndex === selectedWords.length - 1;
+            prevBtn.classList.toggle('opacity-50', prevBtn.disabled);
+            nextBtn.classList.toggle('opacity-50', nextBtn.disabled);
+        }
+
+        function generateQuiz(count) {
+            if (!selectedWords.length) return;
+            const pool = [...selectedWords].sort(() => 0.5 - Math.random()).slice(0, count);
+            quizQuestions = pool.map(w => {
+                const correct = w.japanese;
+                const distractors = vocabularyData
+                    .filter(x => x.japanese !== correct)
+                    .sort(() => 0.5 - Math.random())
+                    .slice(0, 3)
+                    .map(x => x.japanese);
+                return {
+                    q: w.english,
+                    correct,
+                    opts: [correct, ...distractors].sort(() => 0.5 - Math.random())
+                };
+            });
+            score = 0;
+            currentQuestionIndex = 0;
+            incorrectAnswers = [];
+            showQuizQuestion();
+            switchSection('quiz');
+        }
+
+        function showQuizQuestion() {
+            const q = quizQuestions[currentQuestionIndex];
+            if(!q) return;
+            document.getElementById('quiz-question').textContent = q.q;
+            document.getElementById('quiz-progress').textContent = `${currentQuestionIndex + 1}/${quizQuestions.length}`;
+            const optsEl = document.getElementById('quiz-options');
+            optsEl.innerHTML = '';
+            document.getElementById('feedback').innerHTML = '';
+            document.getElementById('next-question-btn').classList.add('hidden');
+
+            q.opts.forEach(opt => {
+                const btn = document.createElement('div');
+                btn.className = 'quiz-option text-base sm:text-lg font-medium';
+                btn.textContent = opt;
+                btn.onclick = () => handleAnswer(btn, opt, q);
+                optsEl.appendChild(btn);
+            });
+        }
+
+        function handleAnswer(btn, ans, q) {
+            if (document.querySelector('.quiz-option.correct')) return;
+            const isCorrect = ans === q.correct;
+            if (isCorrect) {
+                btn.classList.add('correct');
+                document.getElementById('feedback').innerHTML = '<span class="text-green-600"><i class="fas fa-check-circle mr-2"></i> 正解!</span>';
+                score++;
+            } else {
+                btn.classList.add('incorrect');
+                [...document.querySelectorAll('.quiz-option')].forEach(el => {
+                    if (el.textContent === q.correct) el.classList.add('correct');
+                });
+                document.getElementById('feedback').innerHTML = `<span class="text-red-500"><i class="fas fa-times-circle mr-2"></i> 正解: ${escapeHtml(q.correct)}</span>`;
+                incorrectAnswers.push({q: q.q, a: q.correct});
+            }
+            document.getElementById('next-question-btn').classList.remove('hidden');
+        }
+
+        function initSpeech() {
+            if ('speechSynthesis' in window) {
+                const loadVoices = () => {
+                    voices = window.speechSynthesis.getVoices();
+                };
+                window.speechSynthesis.onvoiceschanged = loadVoices;
+                loadVoices();
+            }
+            window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        }
+
+        function speakText(text) {
+            if (!('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel(); // 進行中の音声を停止
+            
+            // [...] を除去し、不要な記号をプレーンなテキストにする
+            const clean = text.replace(/[\[\]]/g, '').split('/')[0].trim();
+            const u = new SpeechSynthesisUtterance(clean);
+            u.lang = 'en-US';
+            u.rate = 0.82; // 少しゆっくりめで聞き取りやすく
+            
+            // 英語(アメリカ)の高品質な音声を探す
+            const preferredVoice = voices.find(v => v.name.includes('Google US English') && v.lang === 'en-US') || 
+                                   voices.find(v => v.name.includes('Samantha') && v.lang === 'en-US') || 
+                                   voices.find(v => v.lang.startsWith('en-'));
+            if (preferredVoice) u.voice = preferredVoice;
+            window.speechSynthesis.speak(u);
+        }
+
+        const getLevenshteinDist = (s, t) => {
+            const m = s.length, n = t.length;
+            const d = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0));
+            for (let i = 0; i <= m; i++) d[i][0] = i;
+            for (let j = 0; j <= n; j++) d[0][j] = j;
+            for (let j = 1; j <= n; j++) {
+                for (let i = 1; i <= m; i++) {
+                    const cost = s[i - 1] === t[j - 1] ? 0 : 1;
+                    d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + cost);
+                }
+            }
+            return d[m][n];
+        };
+
+        function attachListeners() {
+            document.getElementById('select-all').onclick = () => document.querySelectorAll('.word-checkbox').forEach(c => c.checked = true);
+            document.getElementById('deselect-all').onclick = () => document.querySelectorAll('.word-checkbox').forEach(c => c.checked = false);
+            
+            document.getElementById('start-learning-btn').onclick = () => {
+                const checks = document.querySelectorAll('.word-checkbox:checked');
+                if (!checks.length) return alert('学習する単語を1つ以上選択してください。');
+                selectedWords = Array.from(checks).map(c => vocabularyData[c.dataset.index]);
+                currentWordIndex = 0;
+                updateCard();
+                switchSection('learning');
+            };
+
+            document.getElementById('quick-test-btn').onclick = () => {
+                const checks = document.querySelectorAll('.word-checkbox:checked');
+                if (!checks.length) return alert('テストを行う単語を選択してください。');
+                selectedWords = Array.from(checks).map(c => vocabularyData[c.dataset.index]);
+                const div = document.getElementById('test-choices');
+                div.innerHTML = '';
+                [10, 20, 50, selectedWords.length].filter((v, i, a) => a.indexOf(v) === i && v <= selectedWords.length).forEach(n => {
+                    const b = document.createElement('button');
+                    b.className = 'btn btn-primary w-24 h-24 flex flex-col items-center justify-center text-xl shadow-lg hover:scale-105 transform transition duration-150';
+                    b.innerHTML = `<span class="font-bold text-3xl mb-1">${n}</span><span class="text-xs">問題</span>`;
+                    b.onclick = () => generateQuiz(n);
+                    div.appendChild(b);
+                });
+                switchSection('testOptions');
+            };
+
+            els.flashcardContainer.onclick = () => {
+                const isOpen = els.japaneseWrapper.classList.contains('opacity-100');
+                if (isOpen) {
+                    els.japaneseWrapper.classList.remove('opacity-100', 'translate-y-0');
+                    els.japaneseWrapper.classList.add('opacity-0', 'translate-y-4');
+                } else {
+                    els.japaneseWrapper.classList.remove('opacity-0', 'translate-y-4');
+                    els.japaneseWrapper.classList.add('opacity-100', 'translate-y-0');
+                }
+            };
+
+            document.getElementById('prev-btn').onclick = () => { if (currentWordIndex > 0) { currentWordIndex--; updateCard(); } };
+            document.getElementById('next-btn').onclick = () => { if (currentWordIndex < selectedWords.length - 1) { currentWordIndex++; updateCard(); } };
+            
+            document.getElementById('speak-btn').onclick = (e) => { 
+                e.stopPropagation(); 
+                // [...] から元の表現にする
+                const plainText = els.englishText.textContent;
+                speakText(plainText); 
+            };
+            
+            document.getElementById('start-test-btn').onclick = () => {
+                generateQuiz(Math.min(10, selectedWords.length));
+            };
+
+            document.getElementById('record-btn').onclick = async (e) => {
+                e.stopPropagation();
+                if (!window.SpeechRecognition) return alert('ご利用のブラウザは音声認識に対応していません。Google Chrome等をお使いください。');
+                
+                if (recognition && recognition.started) { 
+                    recognition.stop(); 
+                    return; 
+                }
+
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    mediaRecorder = new MediaRecorder(stream);
+                    audioChunks = [];
+                    mediaRecorder.ondataavailable = ev => audioChunks.push(ev.data);
+                    mediaRecorder.onstop = () => {
+                        const blob = new Blob(audioChunks, { type: 'audio/wav' });
+                        recordedAudioURL = URL.createObjectURL(blob);
+                        els.recordingPlayer.src = recordedAudioURL;
+                        document.getElementById('play-recording-btn').disabled = false;
+                        document.getElementById('play-recording-btn').classList.remove('btn-disabled');
+                        els.micIcon.classList.remove('recording');
+                        els.micIcon.className = 'fas fa-microphone text-2xl';
+                        stream.getTracks().forEach(t => t.stop());
+                    };
+                    mediaRecorder.start();
+
+                    recognition = new SpeechRecognition();
+                    recognition.lang = 'en-US';
+                    recognition.started = true;
+                    els.micIcon.className = 'fas fa-stop text-2xl';
+                    els.micIcon.classList.add('recording');
+                    els.pronunciationFeedback.innerHTML = '<span class="text-brand-500 animate-pulse font-bold text-lg"><i class="fas fa-wave-square mr-2"></i>聞き取り中... 発音してください</span>';
+
+                    recognition.onresult = (ev) => {
+                        const transcript = ev.results[0][0].transcript.toLowerCase().trim();
+                        // ターゲットワードの括弧を取り除く
+                        const target = els.englishText.textContent.toLowerCase().replace(/[\[\]]/g, '').trim();
+                        
+                        const d = getLevenshteinDist(transcript, target);
+                        const maxLen = Math.max(transcript.length, target.length);
+                        const score = Math.max(0, Math.round((1 - d / (maxLen || 1)) * 100));
+                        
+                        let msg = '', color = '';
+                        // 3段階採点機能（甘めの判定）
+                        if (score > 65) { 
+                            msg = 'Excellent!'; 
+                            color = 'text-green-600 bg-green-50 border-green-200'; 
+                        } else if (score > 35) { 
+                            msg = 'Good job!'; 
+                            color = 'text-blue-500 bg-blue-50 border-blue-200'; 
+                        } else { 
+                            msg = 'Try again'; 
+                            color = 'text-red-500 bg-red-50 border-red-200'; 
+                        }
+                        
+                        els.pronunciationFeedback.innerHTML = `
+                            <div class="flex flex-col items-center p-3 border rounded-xl ${color}">
+                                <span class="text-xs text-slate-500 mb-1">認識された発音: "${transcript}"</span>
+                                <span class="text-xl font-bold">${msg} (${score}%)</span>
+                            </div>
+                        `;
+                    };
+                    recognition.onend = () => {
+                        recognition.started = false;
+                        if (mediaRecorder.state === 'recording') mediaRecorder.stop();
+                    };
+                    recognition.start();
+                } catch (err) { 
+                    alert('マイクの使用許可が必要です。'); 
+                }
+            };
+
+            document.getElementById('play-recording-btn').onclick = (e) => { 
+                e.stopPropagation(); 
+                if (recordedAudioURL) {
+                    els.recordingPlayer.play(); 
+                }
+            };
+            
+            document.getElementById('back-to-setup-btn').onclick = () => switchSection('setup');
+            document.getElementById('back-to-home-btn').onclick = () => switchSection('setup');
+            document.getElementById('abort-test-btn').onclick = () => switchSection('setup');
+            document.getElementById('restart-btn').onclick = () => {
+                currentQuestionIndex = 0;
+                score = 0;
+                incorrectAnswers = [];
+                showQuizQuestion();
+                switchSection('quiz');
+            };
+            document.getElementById('back-to-learning-btn').onclick = () => switchSection('setup');
+
+            document.getElementById('next-question-btn').onclick = () => {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < quizQuestions.length) {
+                    showQuizQuestion();
+                } else {
+                    document.getElementById('score-percentage').textContent = Math.round(score/quizQuestions.length*100)+'%';
+                    document.getElementById('score-text').textContent = `${quizQuestions.length}問中 ${score}問 正解`;
+                    const list = document.getElementById('incorrect-answers-list');
+                    list.innerHTML = '';
+                    incorrectAnswers.forEach(it => {
+                        const li = document.createElement('li');
+                        li.className = "bg-white p-3 rounded border border-red-100 text-sm";
+                        li.innerHTML = `<div class="font-bold text-slate-800">${escapeHtml(it.q)}</div><div class="text-red-500 font-bold mt-1">正解: ${escapeHtml(it.a)}</div>`;
+                        list.appendChild(li);
+                    });
+                    document.getElementById('incorrect-answers-container').classList.toggle('hidden', incorrectAnswers.length === 0);
+                    switchSection('results');
+                }
+            };
+
+            document.getElementById('download-pdf-btn').onclick = () => document.getElementById('pdf-modal').classList.remove('hidden');
+            document.getElementById('close-modal-icon').onclick = () => document.getElementById('pdf-modal').classList.add('hidden');
+            document.getElementById('close-modal-btn').onclick = () => document.getElementById('pdf-modal').classList.add('hidden');
+        }
+
+        // --- PDF AND TEST GENERATION LOGIC (NO DUPLICATE NUMBERS, SEAMLESS NUMBERING) ---
+        const pdfActions = [
+            { 
+                id: 'download-list-btn', 
+                title: '重要語句・意味リスト', 
+                content: (ws) => `
+                    <p style="margin-bottom:20px; color:#475569;">※模擬試験（進研模試2026年度103英語）の解説に登場する語句の整理プリントです。</p>
+                    <table style="width:100%; border-collapse:collapse; margin-top:10px; font-size:14px;">
+                        <thead>
+                            <tr style="background-color: #f1f5f9;">
+                                <th style="border:1px solid #cbd5e1; padding:10px; width:60px; text-align:center;">番号</th>
+                                <th style="border:1px solid #cbd5e1; padding:10px; text-align:left;">英語表現・重要熟語</th>
+                                <th style="border:1px solid #cbd5e1; padding:10px; text-align:left;">日本語訳・解説義</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${ws.map((w, i) => `
+                                <tr>
+                                    <td style="border:1px solid #cbd5e1; padding:10px; text-align:center; font-weight:bold; color:#64748b;">${i+1}</td>
+                                    <td style="border:1px solid #cbd5e1; padding:10px; font-weight:bold; color:#0f172a;">${escapeHtml(w.english)}</td>
+                                    <td style="border:1px solid #cbd5e1; padding:10px; color:#334155;">${escapeHtml(w.japanese)}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                ` 
+            },
+            { 
+                id: 'download-en-quiz-btn', 
+                title: '重要英単語記述テスト', 
+                content: (ws) => `
+                    <p style="margin-bottom:30px; font-weight:bold;">【問題】次の日本語を英語で書きなさい。</p>
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 20px;">
+                        ${ws.map((w, i) => `
+                            <div style="border-bottom: 1px dashed #cbd5e1; padding-bottom: 12px; margin-bottom: 5px;">
+                                <span style="font-weight:bold; color:#475569; margin-right:15px;">(${i+1})</span>
+                                <span style="font-size:16px;">${escapeHtml(w.japanese)}</span>
+                                <div style="margin-top:10px; border-bottom:1px solid #94a3b8; width:80%; height:25px;"></div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div style="page-break-before:always;"></div>
+                    <h1 style="text-align:center; border-bottom:2px solid #333; padding-bottom:10px; margin-bottom:30px;">重要英単語記述テスト 【解答】</h1>
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 15px; font-size:15px;">
+                        ${ws.map((w, i) => `
+                            <div style="padding: 8px; border-bottom: 1px solid #f1f5f9;">
+                                <span style="font-weight:bold; color:#475569; margin-right:15px;">(${i+1})</span>
+                                <span style="font-weight:bold; color:#0f172a; margin-right:20px;">${escapeHtml(w.english)}</span>
+                                <span style="color:#64748b; font-size:13px;">[ ${escapeHtml(w.japanese)} ]</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                ` 
+            },
+            { 
+                id: 'download-ja-quiz-btn', 
+                title: '重要語句和訳テスト', 
+                content: (ws) => `
+                    <p style="margin-bottom:30px; font-weight:bold;">【問題】次の英語（重要熟語など）の意味を日本語で書きなさい。</p>
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 20px;">
+                        ${ws.map((w, i) => `
+                            <div style="border-bottom: 1px dashed #cbd5e1; padding-bottom: 12px; margin-bottom: 5px;">
+                                <span style="font-weight:bold; color:#475569; margin-right:15px;">(${i+1})</span>
+                                <span style="font-size:17px; font-weight:bold; color:#0f172a;">${escapeHtml(w.english)}</span>
+                                <div style="margin-top:10px; border-bottom:1px solid #94a3b8; width:85%; height:25px;"></div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div style="page-break-before:always;"></div>
+                    <h1 style="text-align:center; border-bottom:2px solid #333; padding-bottom:10px; margin-bottom:30px;">重要語句和訳テスト 【解答】</h1>
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 15px; font-size:15px;">
+                        ${ws.map((w, i) => `
+                            <div style="padding: 8px; border-bottom: 1px solid #f1f5f9;">
+                                <span style="font-weight:bold; color:#475569; margin-right:15px;">(${i+1})</span>
+                                <span style="font-weight:bold; color:#0f172a; margin-right:20px;">${escapeHtml(w.english)}</span>
+                                <span style="color:#0ea5e9; font-weight:bold;">→ ${escapeHtml(w.japanese)}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                ` 
+            },
+            { 
+                id: 'download-mixed-quiz-btn', 
+                title: '語彙混合実戦テスト', 
+                content: (ws) => {
+                    const shuf = [...ws].sort(() => 0.5 - Math.random());
+                    // 問題形式の決定 (英語記述 or 和訳記述)
+                    const quizDetails = shuf.map((w, index) => {
+                        const isEngToJa = Math.random() > 0.5;
+                        return {
+                            index: index + 1,
+                            type: isEngToJa ? 'EngToJa' : 'JaToEng',
+                            questionText: isEngToJa ? w.english : w.japanese,
+                            correctAnswer: isEngToJa ? w.japanese : w.english,
+                            hint: isEngToJa ? '和訳しなさい' : '英訳しなさい'
+                        };
+                    });
+
+                    return `
+                        <p style="margin-bottom:30px; font-weight:bold;">【問題】指示に従って英訳または和訳を完成させなさい。</p>
+                        <div style="display: grid; grid-template-columns: 1fr; gap: 22px;">
+                            ${quizDetails.map((q) => `
+                                <div style="border-bottom: 1px dashed #cbd5e1; padding-bottom: 12px;">
+                                    <span style="font-weight:bold; color:#475569; margin-right:15px;">(${q.index})</span>
+                                    <span style="font-size:16px; font-weight:bold; color:#1e293b;">${escapeHtml(q.questionText)}</span>
+                                    <span style="font-size:11px; background:#f1f5f9; padding:2px 8px; border-radius:4px; margin-left:10px; color:#475569;">${q.hint}</span>
+                                    <div style="margin-top:12px; border-bottom:1px solid #94a3b8; width:85%; height:25px;"></div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div style="page-break-before:always;"></div>
+                        <h1 style="text-align:center; border-bottom:2px solid #333; padding-bottom:10px; margin-bottom:30px;">語彙混合実戦テスト 【解答】</h1>
+                        <div style="display: grid; grid-template-columns: 1fr; gap: 15px; font-size:15px;">
+                            ${quizDetails.map((q) => `
+                                <div style="padding: 8px; border-bottom: 1px solid #f1f5f9;">
+                                    <span style="font-weight:bold; color:#475569; margin-right:15px;">(${q.index})</span>
+                                    <span style="font-size:13px; color:#64748b; margin-right:10px;">[${q.hint}]</span>
+                                    <span style="font-weight:bold; color:#475569; margin-right:15px;">${escapeHtml(q.questionText)}</span>
+                                    <span style="font-weight:bold; color:#0ea5e9;">→ ${escapeHtml(q.correctAnswer)}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                }
+            },
+            { 
+                id: 'download-sentence-quiz-btn', 
+                title: '例文穴埋め実戦テスト', 
+                content: (ws) => {
+                    const valid = ws.filter(w => w.sentence);
+                    return `
+                        <p style="margin-bottom:35px; font-weight:bold;">【問題】日本語の文脈に合うように、英文の空所 ( __________ ) に適当な英単語を入れなさい。</p>
+                        <div style="display: grid; grid-template-columns: 1fr; gap: 25px;">
+                            ${valid.map((w, i) => {
+                                // [...] 部分を空所に置換
+                                const blankSentence = w.sentence.replace(/\[(.*?)\]/g, '____________________');
+                                return `
+                                    <div style="border-bottom: 1px dashed #cbd5e1; padding-bottom: 15px;">
+                                        <div style="display: flex; align-items: flex-start; margin-bottom: 8px;">
+                                            <span style="font-weight:bold; color:#475569; margin-right:15px;">(${i+1})</span>
+                                            <span style="font-size:16px; font-family:serif; line-height:1.5; color:#0f172a;">${escapeHtml(blankSentence)}</span>
+                                        </div>
+                                        <div style="color:#475569; font-size:13.5px; margin-left:35px; padding-left:10px; border-left:3px solid #cbd5e1;">
+                                            訳: ${escapeHtml(w.sentence_ja)}
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                        <div style="page-break-before:always;"></div>
+                        <h1 style="text-align:center; border-bottom:2px solid #333; padding-bottom:10px; margin-bottom:30px;">例文穴埋め実戦テスト 【解答】</h1>
+                        <div style="display: grid; grid-template-columns: 1fr; gap: 15px; font-size:15px;">
+                            ${valid.map((w, i) => {
+                                // [...] 部分のみを解答として抽出
+                                const match = w.sentence.match(/\[(.*?)\]/);
+                                const answer = match ? match[1] : w.english;
+                                return `
+                                    <div style="padding: 10px; border-bottom: 1px solid #f1f5f9; display: flex; align-items: center; justify-content: space-between;">
+                                        <div>
+                                            <span style="font-weight:bold; color:#475569; margin-right:15px;">(${i+1})</span>
+                                            <span style="font-weight:bold; color:#0f172a; font-size:16px; font-family:monospace; background: #f8fafc; padding: 2px 6px; border-radius:4px;">${escapeHtml(answer)}</span>
+                                        </div>
+                                        <div style="font-size:12px; color:#64748b; text-align:right;">
+                                            [原語句: ${escapeHtml(w.english)}]
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    `;
+                }
+            },
+            { 
+                id: 'download-sentence-mixed-quiz-btn', 
+                title: '例文和訳・空所補充記述テスト', 
+                content: (ws) => {
+                    const valid = ws.filter(w => w.sentence).sort(() => 0.5 - Math.random());
+                    const testItems = valid.map((w, index) => {
+                        const isBlankFill = Math.random() > 0.5;
+                        const match = w.sentence.match(/\[(.*?)\]/);
+                        const answerText = match ? match[1] : w.english;
+                        
+                        return {
+                            index: index + 1,
+                            type: isBlankFill ? 'blank' : 'translation',
+                            rawWord: w.english,
+                            japaneseMeaning: w.japanese,
+                            fullSentence: w.sentence.replace(/[\[\]]/g, ''),
+                            blankSentence: w.sentence.replace(/\[(.*?)\]/g, ' ( __________ ) '),
+                            sentenceJa: w.sentence_ja,
+                            answer: isBlankFill ? answerText : w.sentence_ja
+                        };
+                    });
+
+                    return `
+                        <p style="margin-bottom:30px; font-weight:bold;">【問題】問題の指示（空所補充 または 全文和訳）に従いなさい。</p>
+                        <div style="display: grid; grid-template-columns: 1fr; gap: 26px;">
+                            ${testItems.map((item) => {
+                                if (item.type === 'blank') {
+                                    return `
+                                        <div style="border-bottom: 1px dashed #cbd5e1; padding-bottom: 15px;">
+                                            <div style="font-weight:bold; color: #0284c7; font-size: 11px; margin-bottom: 5px;">
+                                                (${item.index}) 【空所補充】和訳を参考にして、括弧に入る適切な単語・熟語を書きなさい。
+                                            </div>
+                                            <div style="font-size:16px; font-family:serif; line-height:1.5; margin-left: 15px; color:#1e293b;">
+                                                ${escapeHtml(item.blankSentence)}
+                                            </div>
+                                            <div style="color:#475569; font-size:13px; margin-left: 15px; margin-top:5px;">
+                                                訳: ${escapeHtml(item.sentenceJa)}
+                                            </div>
+                                            <div style="margin-top:10px; border-bottom:1px solid #94a3b8; width:50%; height:25px; margin-left: 15px;"></div>
+                                        </div>
+                                    `;
+                                } else {
+                                    return `
+                                        <div style="border-bottom: 1px dashed #cbd5e1; padding-bottom: 15px;">
+                                            <div style="font-weight:bold; color: #f97316; font-size: 11px; margin-bottom: 5px;">
+                                                (${item.index}) 【全文和訳】下線部（重要表現）に注意して、次の英文を日本語に直しなさい。
+                                            </div>
+                                            <div style="font-size:16px; font-family:serif; line-height:1.5; margin-left: 15px; color:#1e293b;">
+                                                ${escapeHtml(item.fullSentence.replace(item.rawWord, '____' + item.rawWord + '____'))}
+                                            </div>
+                                            <div style="margin-top:10px; border-bottom:1px solid #cbd5e1; width:90%; height:30px; margin-left: 15px;"></div>
+                                        </div>
+                                    `;
+                                }
+                            }).join('')}
+                        </div>
+                        <div style="page-break-before:always;"></div>
+                        <h1 style="text-align:center; border-bottom:2px solid #333; padding-bottom:10px; margin-bottom:30px;">例文和訳・空所補充記述テスト 【解答】</h1>
+                        <div style="display: grid; grid-template-columns: 1fr; gap: 15px; font-size:15px;">
+                            ${testItems.map((item) => `
+                                <div style="padding: 10px; border-bottom: 1px solid #f1f5f9;">
+                                    <span style="font-weight:bold; color:#475569; margin-right:10px;">(${item.index})</span>
+                                    <span style="font-size:11px; font-weight:bold; padding:2px 6px; border-radius:4px; margin-right:15px; background:${item.type === 'blank' ? '#e0f2fe; color:#0369a1;' : '#ffedd5; color:#c2410c;'}">
+                                        ${item.type === 'blank' ? '空所補充' : '全文和訳'}
+                                    </span>
+                                    <span style="font-weight:bold; color:#0f172a; font-size:15px;">${escapeHtml(item.answer)}</span>
+                                    <div style="color:#64748b; font-size:12px; margin-top:5px; padding-left:20px;">
+                                        【参考】${escapeHtml(item.fullSentence)} (表現: ${escapeHtml(item.rawWord)} - ${escapeHtml(item.japaneseMeaning)})
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                }
+            }
+        ];
+
+        window.onload = () => {
+            // PDF出力イベントバインド
+            pdfActions.forEach(act => {
+                const btn = document.getElementById(act.id);
+                if(btn) {
+                    btn.onclick = () => {
+                        const checks = document.querySelectorAll('.word-checkbox:checked');
+                        if (!checks.length) return alert('プリントに反映する重要語句を一覧から選択してください。');
+                        const words = Array.from(checks).map(c => vocabularyData[c.dataset.index]);
+                        
+                        // 印刷用新ウィンドウ生成
+                        const w = window.open('', '_blank');
+                        w.document.write(`<html>
+                            <head>
+                                <title>${act.title}</title>
+                                <style>
+                                    body{font-family:'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif; margin:40px; line-height:1.6; color:#1e293b;}
+                                    .app-title{text-align:center; font-size:12px; color:#64748b; margin-bottom:5px; text-transform:uppercase; letter-spacing:1px;}
+                                    h1{text-align:center; border-bottom:3px double #334155; padding-bottom:12px; margin-top:0; color:#0f172a;}
+                                    h2{background:#f8fafc; border-left:4px solid #0ea5e9; padding:8px 15px; margin-top:30px; font-size:18px; color:#1e293b;}
+                                    ol li{margin-bottom:15px; line-height:1.7;}
+                                    .quiz-ans-sheet { margin-top: 20px; }
+                                    @media print {
+                                        .page-break { page-break-before: always; }
+                                    }
+                                </style>
+                            </head>
+                            <body>
+                                <div class="app-title">${APP_TITLE}</div>
+                                <h1>${act.title}</h1>
+                                ${act.content(words)}
+                            </body>
+                        </html>`);
+                        w.document.close();
+                        setTimeout(() => w.print(), 500);
+                    };
+                }
+            });
+        };
+    </script>
+</body>
+</html>
